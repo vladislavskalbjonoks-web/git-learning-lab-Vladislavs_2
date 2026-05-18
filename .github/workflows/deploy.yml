@@ -13,8 +13,8 @@ jobs:
         run: bash test.sh
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.vladislavsk2026 }}/gala_projekts .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/gala_projekts .
       - name: Login to Docker Hub
-        run: echo "${{ secrets.dckr_pat_anYeXJH2fntynFKih907qloohoQ }}" | docker login -u "${{ secrets.vladislavsk2026 }}" --password-stdin
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Push to Docker Hub
-        run: docker push ${{ secrets.vladislavsk2026 }}/gala_projekts 
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/gala_projekts
