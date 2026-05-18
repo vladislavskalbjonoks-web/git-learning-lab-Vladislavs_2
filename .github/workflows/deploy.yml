@@ -1,0 +1,20 @@
+name: Build Test Push
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Run test
+        run: bash test.sh
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.vladislavsk2026 }}/gala_projekts .
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.dckr_pat_anYeXJH2fntynFKih907qloohoQ }}" | docker login -u "${{ secrets.vladislavsk2026 }}" --password-stdin
+      - name: Push to Docker Hub
+        run: docker push ${{ secrets.vladislavsk2026 }}/gala_projekts
